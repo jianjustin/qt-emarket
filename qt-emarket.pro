@@ -27,8 +27,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    logindialog.cpp
+    logindialog.cpp \
+    defaultcentralwidget.cpp \
+    commoditylistwidget.cpp \
+    addcommoditywidget.cpp
 
 HEADERS += \
         mainwindow.h \
-    logindialog.h
+    logindialog.h \
+    defaultcentralwidget.h \
+    commoditylistwidget.h \
+    addcommoditywidget.h
