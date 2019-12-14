@@ -7,6 +7,8 @@
 #include <QTableView>
 #include <QPushButton>
 
+#include "commoditydetaildialog.h"
+
 class CommodityListWidget : public QWidget
 {
     Q_OBJECT
@@ -21,9 +23,11 @@ private slots:
    void on_delButton_clicked();
    void on_editButton_clicked();
    void on_showButton_clicked();
+   void reloadTableData();
 private:
     QStandardItemModel *tableModel;
     QTableView *commodityTable;
+    CommodityDetailDialog *commodityDetailDialog;
     //按钮组
     QPushButton *addButton;
     QPushButton *delButton;

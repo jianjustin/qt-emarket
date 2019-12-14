@@ -1,7 +1,5 @@
 #include "commoditylistwidget.h"
 
-#include "commoditydetaildialog.h"
-
 #include <QTableWidget>
 #include <QGridLayout>
 #include <QPushButton>
@@ -9,7 +7,7 @@
 #include <QStandardItem>
 #include <QSqlQuery>
 #include <QDebug>
-
+#include <QMessageBox>
 
 CommodityListWidget::CommodityListWidget(QMainWindow *mainWindow,QWidget *parent) : QWidget(parent)
 {
@@ -73,6 +71,8 @@ void CommodityListWidget::initTableModel(){
  * 初始化表格数据
  */
 void CommodityListWidget::initTableData(){
+    //清空
+    tableModel->clear();
     //商品列表显示
     QString sql = "select CommodityID,CategoryID,Name,InputPrice,OutputPrice,Amount from saleDB.commodity";
     QSqlQuery query;
@@ -89,30 +89,87 @@ void CommodityListWidget::initTableData(){
     }
 }
 
+/**
+ * 添加商品 - 面板弹出
+ */
 void CommodityListWidget::on_addButton_clicked(){
-    CommodityDetailDialog *commodityDetailDialog = new CommodityDetailDialog(-1);
+    commodityDetailDialog = new CommodityDetailDialog(1,-1);
+    commodityDetailDialog->setWindowTitle("电子商城系统-添加商品");
+    connect(commodityDetailDialog,SIGNAL(accepted()),this,SLOT(reloadTableData()));
+    commodityDetailDialog->show();
 }
 
+/**
+ * 删除商品
+ */
 void CommodityListWidget::on_delButton_clicked(){
+    /*检查表格选中栏*/
     QModelIndexList selectedCommodities = commodityTable->selectionModel()->selectedRows();
-    for (int i = 0; i < selectedCommodities.size(); i++)
-    {
-        qDebug() << selectedCommodities[i].data(Qt::DisplayRole).toString();
-
-        qDebug() << tableModel->index(selectedCommodities[i].row(),0).data().toString();
-        qDebug() << tableModel->index(selectedCommodities[i].row(),1).data().toString();
-        qDebug() << tableModel->index(selectedCommodities[i].row(),2).data().toString();
-        qDebug() << tableModel->index(selectedCommodities[i].row(),3).data().toString();
-        qDebug() << tableModel->index(selectedCommodities[i].row(),4).data().toString();
-        qDebug() << tableModel->index(selectedCommodities[i].row(),5).data().toString();
-        qDebug() << "==========================";
+    if(selectedCommodities.size() != 1){
+        QMessageBox::warning(this,"","请选中一行数据进行删除");
+        return;
     }
+
+    /*确认是否删除*/
+    QMessageBox::StandardButton defaultBtn = QMessageBox::NoButton;
+    QMessageBox::StandardButton result;
+    result = QMessageBox::question(this,"","是否确认删除",QMessageBox::Yes|QMessageBox::No,defaultBtn);
+    if(result == QMessageBox::No)
+        return;
+
+    /*进行删除操作*/
+    int itemID = tableModel->index(selectedCommodities[0].row(),0).data().toInt();
+    QString sql = "delete from saleDB.commodity where CommodityID = :CommodityID";
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":CommodityID",itemID);
+    bool result1 = query.exec();
+
+    if(result1)
+        QMessageBox::information(this,"","删除商品成功");
+    else
+        QMessageBox::warning(this,"","删除商品异常，请联系管理员");
+    initTableData();
 }
 
+/**
+ * 修改商品 - 面板弹出
+ */
 void CommodityListWidget::on_editButton_clicked(){
+    /*检查表格选中栏*/
+    QModelIndexList selectedCommodities = commodityTable->selectionModel()->selectedRows();
+    if(selectedCommodities.size() != 1){
+        QMessageBox::warning(this,"","请选中一行数据进行修改");
+        return;
+    }
 
+    /*初始化子面板*/
+    int itemID = tableModel->index(selectedCommodities[0].row(),0).data().toInt();
+    commodityDetailDialog = new CommodityDetailDialog(2,itemID);
+    commodityDetailDialog->setWindowTitle("电子商城系统-修改商品");
+    connect(commodityDetailDialog,SIGNAL(accepted()),this,SLOT(reloadTableData()));
+    commodityDetailDialog->show();
 }
 
+/**
+ * 查看商品 - 面板弹出
+ */
 void CommodityListWidget::on_showButton_clicked(){
+    /*检查表格选中栏*/
+    QModelIndexList selectedCommodities = commodityTable->selectionModel()->selectedRows();
+    if(selectedCommodities.size() != 1){
+        QMessageBox::warning(this,"","请选中一行数据进行查看");
+        return;
+    }
 
+    /*初始化子面板*/
+    int itemID = tableModel->index(selectedCommodities[0].row(),0).data().toInt();
+    commodityDetailDialog = new CommodityDetailDialog(3,itemID);
+    commodityDetailDialog->setWindowTitle("电子商城系统-商品详情");
+    commodityDetailDialog->show();
+}
+
+/*重新加载表格数据*/
+void CommodityListWidget::reloadTableData(){
+    this->initTableData();
 }

@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     createActions();
     createMenus();
 
-    //默认主页，参考"defaultcentralwidget.h"
+    //默认主页，参考"defaultcentralwidget"
     centralWidget = new DefaultCentralWidget(this);
     this->setCentralWidget(centralWidget);
 
