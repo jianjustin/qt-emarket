@@ -10,7 +10,6 @@
 
 #include "defaultcentralwidget.h"
 #include "commoditylistwidget.h"
-#include "addcommoditywidget.h"
 
 class MainWindow : public QMainWindow
 {
@@ -34,7 +33,6 @@ private:
     //UI widgets
     DefaultCentralWidget *centralWidget;//主页面，默认
     CommodityListWidget *commodityListWidget;//商品列表widget
-    AddCommodityWidget *addCommodityWidget;//添加商品widget
 };
 
 #endif // MAINWINDOW_H

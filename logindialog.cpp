@@ -1,6 +1,9 @@
 #include "logindialog.h"
 
 #include <QFormLayout>
+#include <QSqlQuery>
+#include <QDebug>
+#include <QMessageBox>
 
 LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent)
 {
@@ -26,7 +29,18 @@ LoginDialog::LoginDialog(QWidget *parent) : QDialog(parent)
  * @todo 连接数据库进行数据库操作
  */
 void LoginDialog::on_loginButton_clicked(){
-    this->accept();
+    qDebug() << "======================开始登录======================";
+    QString sql = "select * from saleDB.member where Name = :name and PassWord = :password";
+    QSqlQuery query;
+    query.prepare(sql);
+    query.bindValue(":name",username->text());
+    query.bindValue(":password",password->text());
+    query.exec();
+    if(query.next()){
+        this->accept();
+        qDebug() << "======================登录成功======================";
+    }else
+        QMessageBox::warning(this,"登录失败","用户名或密码错误，请重新输入");
 }
 
 /**

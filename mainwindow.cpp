@@ -4,7 +4,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     this->setWindowTitle("e电子商城系统");
-    this->setStyleSheet("QMainWindow {background: '#e9e9e9';}");//设置背景颜色
+    this->setStyleSheet("QMainWindow {background-image:url(/Users/jian/workspace/qt-emarket/images/default.png)}");//设置背景图片
     this->setFixedSize(800,600);
     createActions();
     createMenus();
@@ -51,7 +51,5 @@ void MainWindow::showCommodityListPage(){
  * 添加商品详情
  */
 void MainWindow::addCommodity(){
-    addCommodityWidget = new AddCommodityWidget(this);
-    this->centralWidget->setParent(0);
-    this->setCentralWidget(addCommodityWidget);
+
 }

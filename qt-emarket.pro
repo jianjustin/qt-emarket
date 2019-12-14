@@ -30,11 +30,13 @@ SOURCES += \
     logindialog.cpp \
     defaultcentralwidget.cpp \
     commoditylistwidget.cpp \
-    addcommoditywidget.cpp
+    mysqlconnection.cpp \
+    commoditydetaildialog.cpp
 
 HEADERS += \
         mainwindow.h \
     logindialog.h \
     defaultcentralwidget.h \
     commoditylistwidget.h \
-    addcommoditywidget.h
+    mysqlconnection.h \
+    commoditydetaildialog.h
