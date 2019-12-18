@@ -25,15 +25,16 @@ private slots:
    void on_showButton_clicked();
    void reloadTableData();
 private:
-    QStandardItemModel *tableModel;
-    QTableView *commodityTable;
-    CommodityDetailDialog *commodityDetailDialog;
-    //按钮组
+    /*按钮组*/
     QPushButton *addButton;
     QPushButton *delButton;
     QPushButton *editButton;
     QPushButton *showButton;
-
+    /*表格*/
+    QStandardItemModel *tableModel;
+    QTableView *commodityTable;
+    /*商品详情*/
+    CommodityDetailDialog *commodityDetailDialog;
 };
 
 #endif // COMMODITYLISTWIDGET_H

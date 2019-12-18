@@ -23,23 +23,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::createActions()
 {
-    showGoodsAction = new QAction("查看",this);
+    showGoodsAction = new QAction("商品",this);
     connect(showGoodsAction,SIGNAL(triggered()),this,SLOT (showCommodityListPage()));
-    addGoodsAction =new QAction("添加",this);
-    connect(addGoodsAction,SIGNAL(triggered()),this,SLOT (addCommodity()));
+    ordersAction =new QAction("订单",this);
+    connect(ordersAction,SIGNAL(triggered()),this,SLOT (showOrdersListPage()));
     logoutAction = new QAction("登出",this);
 }
 
 void MainWindow::createMenus(){
-    goodsMenu = menuBar()->addMenu("商品");
+    goodsMenu = menuBar()->addMenu("功能");
     goodsMenu->addAction(showGoodsAction);
-    goodsMenu->addAction(addGoodsAction);
+    goodsMenu->addAction(ordersAction);
     systemMenu = menuBar()->addMenu("系统");
     systemMenu->addAction(logoutAction);
 }
 
 /**
- * 显示商品列表
+ * 进入商品模块
  */
 void MainWindow::showCommodityListPage(){
     commodityListWidget = new CommodityListWidget(this);
@@ -48,8 +48,10 @@ void MainWindow::showCommodityListPage(){
 }
 
 /**
- * 添加商品详情
+ * 进入订单模块
  */
-void MainWindow::addCommodity(){
-
+void MainWindow::showOrdersListPage(){
+    orderListWidget = new OrderListWidget(this);
+    this->centralWidget->setParent(0);
+    this->setCentralWidget(orderListWidget);
 }

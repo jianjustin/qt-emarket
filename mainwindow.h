@@ -10,6 +10,7 @@
 
 #include "defaultcentralwidget.h"
 #include "commoditylistwidget.h"
+#include "orderlistwidget.h"
 
 class MainWindow : public QMainWindow
 {
@@ -22,10 +23,10 @@ public:
     ~MainWindow();
 private slots:
     void showCommodityListPage();
-    void addCommodity();
+    void showOrdersListPage();
 private:
     QAction *showGoodsAction;
-    QAction *addGoodsAction;
+    QAction *ordersAction;
     QAction *logoutAction;
     QMenu *goodsMenu;
     QMenu *systemMenu;
@@ -33,6 +34,7 @@ private:
     //UI widgets
     DefaultCentralWidget *centralWidget;//主页面，默认
     CommodityListWidget *commodityListWidget;//商品列表widget
+    OrderListWidget *orderListWidget;//订单列表widget
 };
 
 #endif // MAINWINDOW_H

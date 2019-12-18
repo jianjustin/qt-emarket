@@ -11,7 +11,7 @@
 
 CommodityListWidget::CommodityListWidget(QMainWindow *mainWindow,QWidget *parent) : QWidget(parent)
 {
-    mainWindow->setWindowTitle("e电子商城系统 - 商品列表");
+    mainWindow->setWindowTitle("e电子商城系统 - 商品");
 
     //初始化按钮
     addButton = new QPushButton("添加商品");
@@ -71,8 +71,6 @@ void CommodityListWidget::initTableModel(){
  * 初始化表格数据
  */
 void CommodityListWidget::initTableData(){
-    //清空
-    tableModel->clear();
     //商品列表显示
     QString sql = "select CommodityID,CategoryID,Name,InputPrice,OutputPrice,Amount from saleDB.commodity";
     QSqlQuery query;
@@ -171,5 +169,5 @@ void CommodityListWidget::on_showButton_clicked(){
 
 /*重新加载表格数据*/
 void CommodityListWidget::reloadTableData(){
-    this->initTableData();
+    this->initCommodityTable();
 }

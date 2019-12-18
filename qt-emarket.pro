@@ -31,7 +31,9 @@ SOURCES += \
     defaultcentralwidget.cpp \
     commoditylistwidget.cpp \
     mysqlconnection.cpp \
-    commoditydetaildialog.cpp
+    commoditydetaildialog.cpp \
+    orderlistwidget.cpp \
+    orderdetailsdialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,4 +41,6 @@ HEADERS += \
     defaultcentralwidget.h \
     commoditylistwidget.h \
     mysqlconnection.h \
-    commoditydetaildialog.h
+    commoditydetaildialog.h \
+    orderlistwidget.h \
+    orderdetailsdialog.h
