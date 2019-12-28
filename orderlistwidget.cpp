@@ -60,7 +60,7 @@ void OrderListWidget::initTableData(){
  * 添加订单
  */
 void OrderListWidget::on_addButton_clicked(){
-    orderDetailsDialog = new OrderDetailsDialog(1,-1);
+    orderDetailsDialog = new OrderDetailsDialog(2,"");
     orderDetailsDialog->setWindowTitle("电子商城系统-添加订单");
     connect(orderDetailsDialog,SIGNAL(accepted()),this,SLOT(reloadTableData()));
     orderDetailsDialog->show();
@@ -70,7 +70,7 @@ void OrderListWidget::on_addButton_clicked(){
  * 显示订单
  */
 void OrderListWidget::on_showButton_clicked(){
-    orderDetailsDialog = new OrderDetailsDialog(1,-1);
+    orderDetailsDialog = new OrderDetailsDialog(1,"");
     orderDetailsDialog->setWindowTitle("电子商城系统-添加订单");
     connect(orderDetailsDialog,SIGNAL(accepted()),this,SLOT(reloadTableData()));
     orderDetailsDialog->show();

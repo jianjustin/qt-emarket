@@ -21,7 +21,7 @@ public:
     ~OrderListWidget();
 signals:
 
-public slots:
+private slots:
     void on_addButton_clicked();
     void on_showButton_clicked();
     void reloadTableData();

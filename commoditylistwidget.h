@@ -6,6 +6,14 @@
 #include <QStandardItemModel>
 #include <QTableView>
 #include <QPushButton>
+#include <QTableWidget>
+#include <QGridLayout>
+#include <QPushButton>
+#include <QTableWidgetItem>
+#include <QStandardItem>
+#include <QSqlQuery>
+#include <QDebug>
+#include <QMessageBox>
 
 #include "commoditydetaildialog.h"
 

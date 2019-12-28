@@ -1,14 +1,5 @@
 #include "commoditylistwidget.h"
 
-#include <QTableWidget>
-#include <QGridLayout>
-#include <QPushButton>
-#include <QTableWidgetItem>
-#include <QStandardItem>
-#include <QSqlQuery>
-#include <QDebug>
-#include <QMessageBox>
-
 CommodityListWidget::CommodityListWidget(QMainWindow *mainWindow,QWidget *parent) : QWidget(parent)
 {
     mainWindow->setWindowTitle("e电子商城系统 - 商品");
@@ -71,6 +62,7 @@ void CommodityListWidget::initTableModel(){
  * 初始化表格数据
  */
 void CommodityListWidget::initTableData(){
+    tableModel->removeRows(0,tableModel->rowCount());
     //商品列表显示
     QString sql = "select CommodityID,CategoryID,Name,InputPrice,OutputPrice,Amount from saleDB.commodity";
     QSqlQuery query;
@@ -169,5 +161,5 @@ void CommodityListWidget::on_showButton_clicked(){
 
 /*重新加载表格数据*/
 void CommodityListWidget::reloadTableData(){
-    this->initCommodityTable();
+    this->initTableData();
 }
